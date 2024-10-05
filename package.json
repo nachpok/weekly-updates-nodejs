@@ -1,0 +1,39 @@
+{
+  "name": "weekly-updates-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nachpok/weekly-updates-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nachpok/weekly-updates-nodejs/issues"
+  },
+  "homepage": "https://github.com/nachpok/weekly-updates-nodejs#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "fs": "^0.0.1-security",
+    "handlebars": "^4.7.8",
+    "node-fetch": "^3.3.2",
+    "nodejs": "^0.0.0",
+    "resend": "^4.0.0",
+    "twilio": "^5.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

@@ -14,6 +14,7 @@ const groupEventsByDistrict = (events) => {
 };
 
 async function sendEventNotification() {
+  console.log("Sending event notification");
   const events = await getCIEvents();
   const users = await getUsers();
 

@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
-// import sendWhatsAppMessage from "./twillio.js";
 import { sendEventNotification } from "./eventNotifications.js";
+import cron from "node-cron";
 const app = express();
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
@@ -39,5 +39,9 @@ if (process.env.NODE_ENV !== "production") {
     console.log(`Server is running on port ${PORT}`);
   });
 }
+
+cron.schedule(process.env.CRON_TIME, sendEventNotification, {
+  timezone: "Asia/Jerusalem",
+});
 
 export default app;

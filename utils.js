@@ -1,5 +1,21 @@
 import dayjs from "dayjs";
 
+const WeekendEventType = {
+  class: "cl",
+  jame: "j",
+  workshop: "w",
+  conference: "co",
+  underscore: "u",
+  retreat: "r",
+};
+
+const WeekendDistrict = {
+  north: "n",
+  south: "s",
+  center: "c",
+  jerusalem: "j",
+};
+
 export const utils = {
   getUpcomingSaturdays: function () {
     const today = dayjs();
@@ -62,5 +78,20 @@ export const utils = {
       eventsForUsers.push({ user, events: userEvents });
     }
     return eventsForUsers;
+  },
+
+  buildPersonalizedEventsUrl: function (newsletterSettings, domain) {
+    const { districts, eventTypes } = newsletterSettings;
+    let url = `${domain}/weekly-events?`;
+
+    districts.forEach((district) => {
+      url += `d=${WeekendDistrict[district]}&`;
+    });
+
+    eventTypes.forEach((eventType) => {
+      url += `e=${WeekendEventType[eventType]}&`;
+    });
+
+    return url;
   },
 };

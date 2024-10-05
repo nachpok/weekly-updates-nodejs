@@ -1,6 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { sendEventNotification } from "./eventNotifications.js";
+import {
+  sendEventEmailTemplateNotification,
+  sendEventSMSNotifications,
+} from "./eventNotifications.js";
 import cron from "node-cron";
 const app = express();
 // Middleware to parse JSON bodies
@@ -28,9 +31,15 @@ app.use(bodyParser.json());
 // });
 
 app.get("/api/send-email", async (req, res) => {
-  const { sentEmails, failedEmails } = await sendEventNotification();
+  const { sentEmails, failedEmails } =
+    await sendEventEmailTemplateNotification();
 
   res.status(200).json({ success: true, sentEmails, failedEmails });
+});
+
+app.get("/api/send-sms", async (req, res) => {
+  const { sentSMSs, failedSMSs } = await sendEventSMSNotifications();
+  res.status(200).json({ success: true, sentSMSs, failedSMSs });
 });
 
 if (process.env.NODE_ENV !== "production") {
@@ -40,7 +49,7 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-cron.schedule(process.env.CRON_TIME, sendEventNotification, {
+cron.schedule(process.env.CRON_TIME, sendEventEmailTemplateNotification, {
   timezone: "Asia/Jerusalem",
 });
 
